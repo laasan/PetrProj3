@@ -3156,6 +3156,11 @@ function (_Slider) {
           slide.querySelector('.card__controls-arrow').style.opacity = '0';
         }
       });
+
+      if (!this.slides[0].closest('button')) {
+        this.slides[0].classList.add(this.activeClass);
+      }
+
       this.slides[0].classList.add(this.activeClass);
 
       if (this.animate) {
@@ -3169,16 +3174,43 @@ function (_Slider) {
       var _this2 = this;
 
       this.next.addEventListener('click', function () {
-        _this2.container.appendChild(_this2.slides[0]);
+        if (_this2.slides[1].tagName == "BUTTON" && _this2.slides[2].tagName == "BUTTON") {
+          _this2.container.appendChild(_this2.slides[0]); //Slide
 
-        _this2.decorizeSlides();
+
+          _this2.container.appendChild(_this2.slides[1]); //Btn
+
+
+          _this2.container.appendChild(_this2.slides[2]); //Btn
+
+
+          _this2.decorizeSlides();
+        } else if (_this2.slides[1].tagName == "BUTTON") {
+          _this2.container.appendChild(_this2.slides[0]); //Slide
+
+
+          _this2.container.appendChild(_this2.slides[1]); //Btn
+
+
+          _this2.decorizeSlides();
+        } else {
+          _this2.container.appendChild(_this2.slides[0]);
+
+          _this2.decorizeSlides();
+        }
       });
       this.prev.addEventListener('click', function () {
-        var active = _this2.slides[_this2.slides.length - 1];
+        for (var i = _this2.slides.length - 1; i > 0; i--) {
+          if (_this2.slides[i].tagName !== "BUTTON") {
+            var active = _this2.slides[i];
 
-        _this2.container.insertBefore(active, _this2.slides[0]);
+            _this2.container.insertBefore(active, _this2.slides[0]);
 
-        _this2.decorizeSlides();
+            _this2.decorizeSlides();
+
+            break;
+          }
+        }
       });
     }
   }, {
