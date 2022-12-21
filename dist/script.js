@@ -2785,7 +2785,8 @@ window.addEventListener('DOMContentLoaded', function () {
     prev: '.modules__info-btns .slick-prev',
     next: '.modules__info-btns .slick-next',
     activeClass: 'card-active',
-    animate: true
+    animate: true,
+    autoplay: true
   });
   modulesSlider.init();
   var feedSlider = new _modules_slider_slider_mini__WEBPACK_IMPORTED_MODULE_1__["default"]({
@@ -3169,35 +3170,34 @@ function (_Slider) {
       }
     }
   }, {
+    key: "nextSlide",
+    value: function nextSlide() {
+      if (this.slides[1].tagName == "BUTTON" && this.slides[2].tagName == "BUTTON") {
+        this.container.appendChild(this.slides[0]); //Slide
+
+        this.container.appendChild(this.slides[1]); //Btn
+
+        this.container.appendChild(this.slides[2]); //Btn
+
+        this.decorizeSlides();
+      } else if (this.slides[1].tagName == "BUTTON") {
+        this.container.appendChild(this.slides[0]); //Slide
+
+        this.container.appendChild(this.slides[1]); //Btn
+
+        this.decorizeSlides();
+      } else {
+        this.container.appendChild(this.slides[0]);
+        this.decorizeSlides();
+      }
+    }
+  }, {
     key: "bindTriggers",
     value: function bindTriggers() {
       var _this2 = this;
 
       this.next.addEventListener('click', function () {
-        if (_this2.slides[1].tagName == "BUTTON" && _this2.slides[2].tagName == "BUTTON") {
-          _this2.container.appendChild(_this2.slides[0]); //Slide
-
-
-          _this2.container.appendChild(_this2.slides[1]); //Btn
-
-
-          _this2.container.appendChild(_this2.slides[2]); //Btn
-
-
-          _this2.decorizeSlides();
-        } else if (_this2.slides[1].tagName == "BUTTON") {
-          _this2.container.appendChild(_this2.slides[0]); //Slide
-
-
-          _this2.container.appendChild(_this2.slides[1]); //Btn
-
-
-          _this2.decorizeSlides();
-        } else {
-          _this2.container.appendChild(_this2.slides[0]);
-
-          _this2.decorizeSlides();
-        }
+        return _this2.nextSlide();
       });
       this.prev.addEventListener('click', function () {
         for (var i = _this2.slides.length - 1; i > 0; i--) {
@@ -3216,9 +3216,17 @@ function (_Slider) {
   }, {
     key: "init",
     value: function init() {
+      var _this3 = this;
+
       this.container.style.cssText = "\n            display: flex;\n            flex-wrap: wrap;\n            overflow: hidden;\n            align-items: flex-start;\n        ";
       this.bindTriggers();
       this.decorizeSlides();
+
+      if (this.autoplay) {
+        setInterval(function () {
+          return _this3.nextSlide();
+        }, 5000);
+      }
     }
   }]);
 
