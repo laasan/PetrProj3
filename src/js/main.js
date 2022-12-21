@@ -29,7 +29,7 @@ window.addEventListener('DOMContentLoaded', () => {
         container: '.feed__slider',
         prev: '.feed__slider .slick-prev',
         next: '.feed__slider .slick-next',
-        activeClass: 'card-active',
+        activeClass: '.feed__item-active',
     });
     feedSlider.init();
 

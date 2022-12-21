@@ -2793,7 +2793,7 @@ window.addEventListener('DOMContentLoaded', function () {
     container: '.feed__slider',
     prev: '.feed__slider .slick-prev',
     next: '.feed__slider .slick-next',
-    activeClass: 'card-active'
+    activeClass: '.feed__item-active'
   });
   feedSlider.init();
   var player = new _modules_playVideo__WEBPACK_IMPORTED_MODULE_2__["default"]('.showup .play', '.overlay');
