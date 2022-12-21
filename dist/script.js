@@ -2833,18 +2833,48 @@ function () {
 
     this.oldOfficer = document.querySelector(oldOfficer);
     this.newOfficer = document.querySelector(newOfficer);
+    this.oldItems = this.oldOfficer.querySelectorAll(items);
+    this.newItems = this.newOfficer.querySelectorAll(items);
     this.items = items;
+    this.oldCounter = 0;
+    this.newCounter = 0;
   }
 
   _createClass(Difference, [{
+    key: "bindTriggers",
+    value: function bindTriggers() {
+      var _this = this;
+
+      this.oldOfficer.querySelector('.plus').addEventListener('click', function () {
+        if (_this.oldCounter !== _this.oldItems.length - 2) {
+          _this.oldItems[_this.oldCounter].style.display = 'flex';
+          _this.oldCounter++;
+        } else {
+          _this.oldItems[_this.oldCounter].style.display = 'flex';
+
+          _this.oldItems[_this.oldItems.length - 1].remove();
+        }
+      });
+      this.newOfficer.querySelector('.plus').addEventListener('click', function () {
+        if (_this.newCounter !== _this.newItems.length - 2) {
+          _this.newItems[_this.newCounter].style.display = 'flex';
+          _this.newCounter++;
+        } else {
+          _this.newItems[_this.newCounter].style.display = 'flex';
+
+          _this.newItems[_this.newItems.length - 1].remove();
+        }
+      });
+    }
+  }, {
     key: "hideItems",
     value: function hideItems() {
-      this.oldOfficer.querySelectorAll(this.items).forEach(function (item, i, arr) {
+      this.oldItems.forEach(function (item, i, arr) {
         if (i !== arr.length - 1) {
           item.style.display = 'none';
         }
       });
-      this.newOfficer.querySelectorAll(this.items).forEach(function (item, i, arr) {
+      this.newItems.forEach(function (item, i, arr) {
         if (i !== arr.length - 1) {
           item.style.display = 'none';
         }
@@ -2854,6 +2884,7 @@ function () {
     key: "init",
     value: function init() {
       this.hideItems();
+      this.bindTriggers();
     }
   }]);
 
