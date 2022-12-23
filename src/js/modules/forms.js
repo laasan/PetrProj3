@@ -16,6 +16,18 @@ export default class Form {
         });
     }
 
+    checkMailInputs() {
+        const mailInputs = document.querySelectorAll('[type="email"]');
+
+        mailInputs.forEach(input => {
+            input.addEventListener('keypress', function(e) {
+                if (e.key.match(/[^a-z 0-9 @ \.]/ig)) {
+                    e.preventDefault();
+                }
+            });
+        });
+    }
+
     async postData(url, data) {
         let res = await fetch(url, {
             method: "POST",
@@ -26,6 +38,8 @@ export default class Form {
     }
 
     init() {
+        this.checkMailInputs();
+
         this.forms.forEach(item => {
             item.addEventListener('submit', (e) => {
                 e.preventDefault();
