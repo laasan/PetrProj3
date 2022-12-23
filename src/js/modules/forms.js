@@ -1,12 +1,19 @@
 export default class Form {
     constructor(forms) {
         this.forms = document.querySelectorAll(forms);
+        this.inputs = document.querySelectorAll('input');
         this.message = {
             loading: 'Загрузка...',
             success: 'Спасибо! Скоро мы с вами свяжемся!',
             failure: 'Что-то пошло не так...'
         };
         this.path = 'assets/question.php';
+    }
+
+    clearInputs() {
+        this.inputs.forEach(item => {
+            item.value = '';
+        });
     }
 
     async postData(url, data) {
@@ -42,6 +49,12 @@ export default class Form {
                     })
                     .catch(() => {
                         statusMessage.textContent = this.message.failure;
+                    })
+                    .finally(() => {
+                        this.clearInputs();
+                        setTimeout(() => {
+                            statusMessage.remove();
+                        }, 6000);
                     });
             });
         });
