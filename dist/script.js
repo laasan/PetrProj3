@@ -5832,7 +5832,7 @@ function (_Slider) {
     value: function render() {
       var _this2 = this;
 
-      try {
+      if (this.container) {
         try {
           this.hanson = document.querySelector('.hanson');
         } catch (error) {}
@@ -5849,7 +5849,7 @@ function (_Slider) {
           });
         });
         this.showSlides(this.slideIndex);
-      } catch (error) {}
+      }
     }
   }]);
 
