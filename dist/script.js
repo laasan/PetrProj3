@@ -5849,6 +5849,16 @@ function (_Slider) {
           });
         });
         this.showSlides(this.slideIndex);
+        document.querySelectorAll('.prevmodule').forEach(function (item) {
+          item.addEventListener('click', function () {
+            _this2.plusSlides(-1);
+          });
+        });
+        document.querySelectorAll('.nextmodule').forEach(function (item) {
+          item.addEventListener('click', function () {
+            _this2.plusSlides(1);
+          });
+        });
       }
     }
   }]);
