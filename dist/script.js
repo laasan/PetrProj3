@@ -5723,6 +5723,7 @@ function () {
           blockedElem.querySelector('.play__text').classList.remove('attention');
           blockedElem.style.opacity = 1;
           blockedElem.style.filter = 'none';
+          blockedElem.setAttribute('data-disabled', 'false');
         }
       }
     }
