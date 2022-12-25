@@ -5789,7 +5789,9 @@ function () {
     value: function init() {
       this.btns.forEach(function (btn) {
         btn.addEventListener('click', function () {
-          btn.closest('.module__info-show').nextElementSibling.style.display = 'block';
+          var sibling = btn.closest('.module__info-show').nextElementSibling;
+          sibling.classList.toggle('msg');
+          sibling.style.marginTop = '20px';
         });
       });
     }
