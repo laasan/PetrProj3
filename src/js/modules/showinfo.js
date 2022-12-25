@@ -6,7 +6,7 @@ export default class ShowInfo {
     init() {
         this.btns.forEach(btn => {
             btn.addEventListener('click', () => {
-                const sibling = btn.closest('.module__info-show').nextElementSibling;
+                const sibling = btn.closest('.module__info-show').nextElementSibling.style.display = 'block';
             });
         });
     }

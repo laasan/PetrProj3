@@ -5789,7 +5789,7 @@ function () {
     value: function init() {
       this.btns.forEach(function (btn) {
         btn.addEventListener('click', function () {
-          var sibling = btn.closest('.module__info-show').nextElementSibling;
+          var sibling = btn.closest('.module__info-show').nextElementSibling.style.display = 'block';
         });
       });
     }
