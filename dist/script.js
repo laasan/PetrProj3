@@ -5622,10 +5622,18 @@ function () {
         btn.addEventListener('click', function () {
           if (document.querySelector('iframe#frame')) {
             _this.overlay.style.display = 'flex';
-          } else {
-            var path = btn.getAttribute('data-url');
 
-            _this.createPlayer(path);
+            if (_this.path != btn.getAttribute('data-url')) {
+              _this.path = btn.getAttribute('data-url');
+
+              _this.player.loadVideoById({
+                videoId: _this.path
+              });
+            }
+          } else {
+            _this.path = btn.getAttribute('data-url');
+
+            _this.createPlayer(_this.path);
           }
         });
       });
@@ -5655,12 +5663,14 @@ function () {
   }, {
     key: "init",
     value: function init() {
-      var tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      this.bindTriggers();
-      this.bindCloseBtn();
+      if (this.btns.length > 0) {
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        this.bindTriggers();
+        this.bindCloseBtn();
+      }
     }
   }]);
 
